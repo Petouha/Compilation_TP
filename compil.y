@@ -25,13 +25,27 @@ void yyerror(const char* s){
 %start EXPR
 
 %%
-EXPR: EXPR '+' EXPR {addition();}
-    | EXPR '-' EXPR {soustraction();}
-    | EXPR '*' EXPR {multiplication();}
-    | EXPR '/' EXPR {division();}
+EXPR: EXPR '+' EXPR {
+        if( ( $$=test_expr($1,$3) ) != ERR_T)
+            addition();
+    }
+    | EXPR '-' EXPR {
+        if( ( $$=test_expr($1,$3) ) != ERR_T)
+            soustraction();
+    }
+    | EXPR '*' EXPR {
+        if( ( $$=test_expr($1,$3) ) != ERR_T)
+            multiplication();
+    }
+    | EXPR '/' EXPR {
+        if( ( $$=test_expr($1,$3) ) != ERR_T)
+            division();
+    }
     | EXPR AND EXPR
     | '(' EXPR ')'  
     | NUM           {num($1);$$=NUM_T;}
+    | TRUE          {$$=BOOL_T;printf("\tconst ax,1\n\tpush ax\n");}
+    | FALSE         {$$=BOOL_T;}
     ;
 %%
 int main(void){

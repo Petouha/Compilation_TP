@@ -88,3 +88,9 @@ void num(int number){
     printf("\tconst ax,%d\n",number);
     printf("\tpush ax\n");
 }
+
+int test_expr(int first, int second){
+    if(first == ERR_T || second == ERR_T || first != second)
+        return ERR_T;
+    return first;
+}
