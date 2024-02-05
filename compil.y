@@ -22,9 +22,14 @@ void yyerror(const char* s){
 %left '+' '-'
 %left '*' '/'
 
-%start EXPR
+%start E
 
 %%
+E: EXPR{
+    switch($1){
+        case ERR_T: fprintf(stderr,"Erreur de types, résultat peut être incorrect\n");
+    }
+};
 EXPR: EXPR '+' EXPR {
         if( ( $$=test_expr($1,$3) ) != ERR_T)
             addition();
@@ -45,7 +50,7 @@ EXPR: EXPR '+' EXPR {
     | '(' EXPR ')'  
     | NUM           {num($1);$$=NUM_T;}
     | TRUE          {$$=BOOL_T;num(1);}
-    | FALSE         {$$=BOOL_T;num(2);}
+    | FALSE         {$$=BOOL_T;num(0);}
     ;
 %%
 int main(void){
