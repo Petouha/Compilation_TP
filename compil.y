@@ -44,8 +44,8 @@ EXPR: EXPR '+' EXPR {
     | EXPR AND EXPR
     | '(' EXPR ')'  
     | NUM           {num($1);$$=NUM_T;}
-    | TRUE          {$$=BOOL_T;printf("\tconst ax,1\n\tpush ax\n");}
-    | FALSE         {$$=BOOL_T;}
+    | TRUE          {$$=BOOL_T;num(1);}
+    | FALSE         {$$=BOOL_T;num(2);}
     ;
 %%
 int main(void){
