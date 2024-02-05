@@ -16,9 +16,12 @@ void yyerror(const char* s){
 %type<synth> EXPR
 
 %token<entier> NUM
-%token AND EGAL DIF TRUE FALSE
+%token AND EGAL DIF TRUE FALSE OR
+
 
 %left EGAL DIF
+%left OR
+%left AND
 %left '+' '-'
 %left '*' '/'
 
@@ -31,22 +34,32 @@ E: EXPR{
     }
 };
 EXPR: EXPR '+' EXPR {
-        if( ( $$=test_expr($1,$3) ) != ERR_T)
+        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
             addition();
     }
     | EXPR '-' EXPR {
-        if( ( $$=test_expr($1,$3) ) != ERR_T)
+        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
             soustraction();
     }
     | EXPR '*' EXPR {
-        if( ( $$=test_expr($1,$3) ) != ERR_T)
+        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
             multiplication();
     }
     | EXPR '/' EXPR {
-        if( ( $$=test_expr($1,$3) ) != ERR_T)
+        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
             division();
     }
-    | EXPR AND EXPR
+    | EXPR AND EXPR {
+        if( ( $$=test_expr_bool($1,$3) ) != ERR_T)
+            multiplication();
+    }
+    | EXPR OR EXPR  {
+        if( ( $$=test_expr_bool($1,$3) ) != ERR_T)
+            or();
+    }
+    | EXPR EGAL EXPR {}
+    | EXPR DIF EXPR {}
+    
     | '(' EXPR ')'  
     | NUM           {num($1);$$=NUM_T;}
     | TRUE          {$$=BOOL_T;num(1);}

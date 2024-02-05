@@ -89,8 +89,31 @@ void num(int number){
     printf("\tpush ax\n");
 }
 
-int test_expr(int first, int second){
-    if(first == ERR_T || second == ERR_T || first != second)
+int test_expr_int(int first, int second){
+    if(first != NUM_T || second != NUM_T)
         return ERR_T;
     return first;
+}
+
+int test_expr_bool(int first, int second){
+    if(first != BOOL_T || second != BOOL_T)
+        return ERR_T;
+    return first;
+}
+
+void or(){
+    printf("\tpop ax\n");
+    printf("\tpop bx\n");
+    printf("\tadd ax,bx\n");
+    printf("\tconst cx,jump\n");
+    printf("\tconst bx,0\n");
+    printf("\tcmp ax,bx\n");
+    printf("\tjmpc cx\n");
+    printf("\tconst ax,1\n");
+    printf("\tpush ax\n");
+    printf("\tconst ax,fin\n");
+    printf("\tjmp ax\n");
+    printf(":jump\n");    
+    printf("\tpush ax\n");
+    printf(":fin\n");
 }
