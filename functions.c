@@ -117,3 +117,10 @@ void or(){
     printf("\tpush ax\n");
     printf(":fin\n");
 }
+
+/*le not
+pop bx
+const ax,1
+sub ax,bx
+push ax
+*/
