@@ -33,34 +33,59 @@ E: EXPR{
         case ERR_T: fprintf(stderr,"Erreur de types, résultat peut être incorrect\n");
     }
 };
+
 EXPR: EXPR '+' EXPR {
-        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
+    if(test_expr_int($1,$3) == ERR_T){
+            $$=ERR_T;
+        } else {
+            $$=NUM_T;
             addition();
+        }
     }
     | EXPR '-' EXPR {
-        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
+        if(test_expr_int($1,$3) == ERR_T){
+            $$=ERR_T;
+        } else {
+            $$=NUM_T;
             soustraction();
+        }
     }
     | EXPR '*' EXPR {
-        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
+        if(test_expr_int($1,$3) == ERR_T){
+            $$=ERR_T;
+        } else {
+            $$=NUM_T;
             multiplication();
+        }
     }
     | EXPR '/' EXPR {
-        if( ( $$=test_expr_int($1,$3) ) != ERR_T)
+        if(test_expr_int($1,$3) == ERR_T){
+            $$=ERR_T;
+        } else {
+            $$=NUM_T;
             division();
+        }
     }
     | EXPR AND EXPR {
-        if( ( $$=test_expr_bool($1,$3) ) != ERR_T)
+        if(test_expr_bool($1,$3) == ERR_T){
+            $$=ERR_T;
+        } else {
+            $$=BOOL_T;
             multiplication();
+        }
     }
     | EXPR OR EXPR  {
-        if( ( $$=test_expr_bool($1,$3) ) != ERR_T)
+        if(test_expr_bool($1,$3) == ERR_T){
+            $$=ERR_T;
+        } else {
+            $$=BOOL_T;
             or();
+        }
     }
     | EXPR EGAL EXPR {}
     | EXPR DIF EXPR {}
     
-    | '(' EXPR ')'  
+    | '(' EXPR ')'  {}
     | NUM           {num($1);$$=NUM_T;}
     | TRUE          {$$=BOOL_T;num(1);}
     | FALSE         {$$=BOOL_T;num(0);}
