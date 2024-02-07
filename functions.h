@@ -1,5 +1,10 @@
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef enum 
 {
@@ -14,7 +19,7 @@ void soustraction();
 void multiplication();
 void division();
 
-void or();
+void or(int label_num);
 
 void num(int number);
 
@@ -23,3 +28,7 @@ void end_asm();
 
 void err_div();
 void err_mul();
+
+char* create_label(char* label_name, int number);
+
+#endif
