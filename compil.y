@@ -82,7 +82,9 @@ EXPR: EXPR '+' EXPR {
             $$=ERR_T;
         } else {
             $$=BOOL_T;
-            or();
+            or(label_number);
+            label_number++;
+            
         }
     }
     | EXPR EGAL EXPR {}
