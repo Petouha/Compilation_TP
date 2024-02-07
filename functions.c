@@ -92,13 +92,13 @@ void num(int number){
 int test_expr_int(int first, int second){
     if(first != NUM_T || second != NUM_T)
         return ERR_T;
-    return first;
+    return NUM_T;
 }
 
 int test_expr_bool(int first, int second){
     if(first != BOOL_T || second != BOOL_T)
         return ERR_T;
-    return first;
+    return BOOL_T;
 }
 
 void or(){
