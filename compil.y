@@ -6,6 +6,9 @@ int yylex();
 void yyerror(const char* s){
     fprintf(stderr,"%s\n",s);
 }
+
+int label_number = 0;
+
 %}
 
 %union{
