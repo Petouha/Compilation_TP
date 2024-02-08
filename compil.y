@@ -84,14 +84,13 @@ EXPR: EXPR '+' EXPR {
             $$=BOOL_T;
             or(label_number);
             label_number++;
-            
         }
     }
     | EXPR EGAL EXPR {}
     | EXPR DIF EXPR {}
     
-    | '(' EXPR ')'  {}
-    | NUM           {num($1);$$=NUM_T;}
+    | '(' EXPR ')'  {$$=$2;}
+    | NUM           {$$=NUM_T;num($1);}
     | TRUE          {$$=BOOL_T;num(1);}
     | FALSE         {$$=BOOL_T;num(0);}
     ;
