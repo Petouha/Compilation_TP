@@ -173,9 +173,10 @@ char* create_label(char* label_name, int number){
     return buffer;
 }
 
-/*le not
-pop bx
-const ax,1
-sub ax,bx
-push ax
-*/
+void not(){
+    printf("\tpop bx\n");
+    printf("\tconst ax,1\n");
+    printf("\tsub ax,bx\n");
+    printf("\tpush ax\n");
+}
+

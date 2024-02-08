@@ -18,6 +18,7 @@ int strtoEntier(const char *s);
 "&&" {return AND;}
 "==" {return EGAL;}
 "||" {return OR;}
+"!"  {return NOT;}
 
 "true" {return TRUE;}
 "false" {return FALSE;}

@@ -19,12 +19,13 @@ int label_number = 0;
 %type<synth> EXPR
 
 %token<entier> NUM
-%token AND EGAL DIF TRUE FALSE OR
+%token AND EGAL DIF TRUE FALSE OR NOT
 
 
 %left EGAL DIF
 %left OR
 %left AND
+%left NOT
 %left '+' '-'
 %left '*' '/'
 
@@ -106,6 +107,7 @@ EXPR: EXPR '+' EXPR {
     }
     
     | '(' EXPR ')'  {$$=$2;}
+    | NOT EXPR      {$$=$2;not();}
     | NUM           {$$=NUM_T;num($1);}
     | TRUE          {$$=BOOL_T;num(1);}
     | FALSE         {$$=BOOL_T;num(0);}
