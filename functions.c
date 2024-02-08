@@ -125,8 +125,8 @@ void egal(int label_num){
     char *end = create_label("end",label_num);
     printf("\tpop ax\n");
     printf("\tpop bx\n");
-    printf("\tcmp ax,bx\n");
     printf("\tconst cx,%s\n",jump);
+    printf("\tcmp ax,bx\n");
     printf("\tjmpc cx\n");
     printf("\tconst ax,0\n");
     printf("\tpush ax\n");
@@ -138,6 +138,27 @@ void egal(int label_num){
     printf(":%s\n",end);
 
 }
+
+
+void dif(int label_num){
+    char *jump = create_label("jump",label_num);
+    char *end = create_label("end",label_num);
+    printf("\tpop ax\n");
+    printf("\tpop bx\n");
+    printf("\tconst cx,%s\n",jump);
+    printf("\tcmp ax,bx\n");
+    printf("\tjmpc cx\n");
+    printf("\tconst ax,1\n");
+    printf("\tpush ax\n");
+    printf("\tconst ax,%s\n",end);
+    printf("\tjmp ax\n");
+    printf(":%s\n",jump);
+    printf("\tconst ax,0\n");   
+    printf("\tpush ax\n");
+    printf(":%s\n",end);
+
+}
+
 
 char* create_label(char* label_name, int number){
     char* buffer = (char*)malloc(128 * sizeof(char));

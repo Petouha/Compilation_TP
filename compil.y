@@ -95,7 +95,15 @@ EXPR: EXPR '+' EXPR {
             label_number++;
         }
     }
-    | EXPR DIF EXPR {}
+    | EXPR DIF EXPR {
+        if(test_expr_bool($1,$3) == ERR_T){
+            $$=ERR_T;
+        } else {
+            $$=BOOL_T;
+            dif(label_number);
+            label_number++;
+        }
+    }
     
     | '(' EXPR ')'  {$$=$2;}
     | NUM           {$$=NUM_T;num($1);}

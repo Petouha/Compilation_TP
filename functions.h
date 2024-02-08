@@ -21,6 +21,7 @@ void division();
 
 void or(int label_num);
 void egal(int label_num);
+void dif(int label_num);
 
 void num(int number);
 
