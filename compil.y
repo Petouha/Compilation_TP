@@ -88,7 +88,7 @@ EXPR: EXPR '+' EXPR {
         }
     }
     | EXPR EGAL EXPR {
-        if(test_expr_bool($1,$3) == ERR_T){
+        if($1 != $3  || $1 == ERR_T || $3 == ERR_T){
             $$=ERR_T;
         } else {
             $$=BOOL_T;
@@ -97,7 +97,7 @@ EXPR: EXPR '+' EXPR {
         }
     }
     | EXPR DIF EXPR {
-        if(test_expr_bool($1,$3) == ERR_T){
+        if($1 != $3 || $1 == ERR_T || $3 == ERR_T){
             $$=ERR_T;
         } else {
             $$=BOOL_T;
