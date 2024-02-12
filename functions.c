@@ -159,6 +159,12 @@ void dif(int label_num){
 
 }
 
+void not(){
+    printf("\tpop bx\n");
+    printf("\tconst ax,1\n");
+    printf("\tsub ax,bx\n");
+    printf("\tpush ax\n");
+}
 
 char* create_label(char* label_name, int number){
     char* buffer = (char*)malloc(128 * sizeof(char));
@@ -173,10 +179,4 @@ char* create_label(char* label_name, int number){
     return buffer;
 }
 
-void not(){
-    printf("\tpop bx\n");
-    printf("\tconst ax,1\n");
-    printf("\tsub ax,bx\n");
-    printf("\tpush ax\n");
-}
 
